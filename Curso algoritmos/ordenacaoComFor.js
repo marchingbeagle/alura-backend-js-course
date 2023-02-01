@@ -1,14 +1,5 @@
 const livros = require("./listaLivros");
 
-// logica do curso
-// let maisBarato = 0;
-// for (let atual = 0; atual < livros.length; atual++) {
-//   if (livros[atual] < livros[maisBarato]) {
-//     maisBarato = atual;
-//     console.log(livros[maisBarato]);
-//   }
-// }
-
 // logica q eu fiz
 let menorPreco = livros[0].preco;
 let menorPrecoPosicao = 0;
