@@ -10,7 +10,7 @@ function extractLinks(text) {
   const result = capture.map((capture) => ({
     [capture[1]]: [capture[2]],
   }));
-  return result;
+  return result.length > 0 ? result : console.log("Links not found");
 }
 
 function treatError(error) {
@@ -21,9 +21,10 @@ async function getFile(filePath) {
   try {
     const encoding = "utf-8";
     const content = await fs.promises.readFile(filePath, encoding);
-    console.log(extractLinks(content));
+    return extractLinks(content);
   } catch (error) {
     treatError(error);
   }
 }
-getFile("./arquivos/texto.md");
+
+export default getFile;
