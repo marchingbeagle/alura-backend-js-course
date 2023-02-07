@@ -7,12 +7,10 @@ function treatError(error) {
 
 function getFile(filePath) {
   const encoding = "utf-8";
-  fs.readFile(filePath, encoding, (error, content) => {
-    if (error) {
-      treatError(error);
-    }
-    console.log(chalk.green(content));
-  });
+  fs.promises
+    .readFile(filePath, encoding)
+    .then((content) => console.log(chalk.green(content)))
+    .catch(treatError);
 }
 
 getFile("./arquivos/texto.md");
