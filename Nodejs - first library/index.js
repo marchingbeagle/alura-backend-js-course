@@ -1,5 +1,4 @@
 import fs from "fs";
-import chalk from "chalk";
 
 function extractLinks(text) {
   const regex = /\[([^[\]]*?)\]\((https?:\/\/[^\s#.]*.[^\s]*)\)/gm;
@@ -14,7 +13,7 @@ function extractLinks(text) {
 }
 
 function treatError(error) {
-  throw new Error(chalk.red(error.code, "Error detected"));
+  throw new Error(error.code, "Error detected");
 }
 
 async function getFile(filePath) {
