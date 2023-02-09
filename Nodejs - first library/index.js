@@ -7,7 +7,7 @@ function extractLinks(text) {
   // const capture = regex.exec(text);
   const capture = [...text.matchAll(regex)];
   const result = capture.map((capture) => ({
-    [capture[1]]: [capture[2]],
+    [capture[1]]: capture[2],
   }));
   return result.length > 0 ? result : console.log("Links not found");
 }

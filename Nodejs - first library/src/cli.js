@@ -1,11 +1,16 @@
 import fs, { lstat } from "fs";
 import { get } from "http";
 import getFile from "../index.js";
+import validateList from "./httpValidation.js";
 
 const path = process.argv;
 
-function printList(list, fileName = "") {
-  console.log("Link list:", fileName, list);
+async function printList(validate, list, fileName = "") {
+  if (validate) {
+    console.log("Validate link list:", fileName, await validateList(list));
+  } else {
+    console.log("Link list:", fileName, list);
+  }
 }
 
 try {
@@ -18,15 +23,16 @@ try {
 
 async function processText(argument) {
   const path = argument[2];
+  const validate = argument[3] === "--validate";
 
   if (fs.lstatSync(path).isFile()) {
     const result = await getFile(argument[2]);
-    printList(result);
+    printList(validate, result);
   } else if (fs.lstatSync(path).isDirectory()) {
     const files = await fs.promises.readdir(path);
     files.forEach(async (Element) => {
       const list = await getFile(`${path}/${Element}`);
-      printList(list, Element);
+      printList(validate, list, Element);
     });
   }
 }
