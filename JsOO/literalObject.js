@@ -5,6 +5,13 @@ const user = {
   role: "admin",
   ativo: true,
   showInfo: function () {
-    console.log("Nome:" + this.name + ", email:" + this.name);
+    console.log("Nome:" + this.name + ", email:" + this.email);
   },
 };
+
+const showUser = function () {
+  console.log("Nome:" + this.name + ", email:" + this.email);
+};
+const showEmail = showUser.bind(user);
+
+showEmail();
